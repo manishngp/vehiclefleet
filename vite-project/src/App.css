@@ -122,7 +122,7 @@ body {
   box-shadow: 0 4px 10px rgba(214, 52, 71, 0.3);
 }
 
-/* Responsive */
+
 @media (max-width: 600px) {
   .status-select {
     width: 100%;
@@ -154,7 +154,7 @@ body {
   box-shadow: 0 4px 10px rgba(214, 52, 71, 0.3);
 }
 
-/* Responsive */
+
 @media (max-width: 600px) {
   .sort-select {
     width: 100%;
@@ -175,7 +175,7 @@ body {
 }
 
 .car-icon {
-  color: #d63447; /* primary color */
+  color: #d63447; 
   animation: moveCar 1s infinite alternate;
 }
 
@@ -191,7 +191,7 @@ body {
   }
 }
 
-/* Responsive */
+
 @media (max-width: 600px) {
   .loading {
     flex-direction: column;
@@ -213,12 +213,12 @@ body {
   padding: 40px 0;
   gap: 12px;
   font-family: 'Poppins', sans-serif;
-  color: #d63447; /* primary color */
+  color: #d63447; 
   text-align: center;
 }
 
 .no-vehicles-icon {
-  color: #f57b51; /* accent color */
+  color: #f57b51; 
   animation: bounce 1s infinite alternate;
 }
 
@@ -227,7 +227,7 @@ body {
   font-weight: 500;
 }
 
-/* Simple bounce animation */
+
 @keyframes bounce {
   0% {
     transform: translateY(0);
@@ -240,7 +240,6 @@ body {
   }
 }
 
-/* Responsive */
 @media (max-width: 600px) {
   .no-vehicles p {
     font-size: 1rem;
@@ -272,7 +271,7 @@ body {
 }
 
 .table-wrapper {
-  overflow-x: auto; /* horizontal scroll for mobile */
+  overflow-x: auto; 
 }
 
 .vehicle-table {
@@ -305,14 +304,14 @@ body {
   background: #fdf2f2;
 }
 
-/* Status cell already has icon in JSX */
+
 .status-cell {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-/* Responsive */
+
 @media (max-width: 600px) {
   .vehicle-table th,
   .vehicle-table td {
@@ -504,12 +503,12 @@ body {
 }
 
 .toolbar > * {
-  flex: 1; /* allows inputs to grow equally */
-  min-width: 150px; /* responsive minimum width */
+  flex: 1; 
+  min-width: 150px; 
   margin-top: 10px;
 }
 
-/* Optional: style Search input inside Search component */
+
 .toolbar input[type="text"] {
   padding: 8px 12px;
   border-radius: 8px;
@@ -523,3 +522,4 @@ body {
   border-color: #d63447;
   outline: none;
 }
+

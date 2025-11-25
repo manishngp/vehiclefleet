@@ -8,22 +8,22 @@ import { Car } from "lucide-react";
 import "../App.css"; 
 
 
-import { Circle } from "lucide-react"; // Lucide icon
+import { Circle } from "lucide-react"; 
 
 
-const VehicleList = ({ setSelectedVehicle }) => {
-  const { vehicles, loading, totalVehicles, limit, page } = useVehicle();
+             const VehicleList = ({ setSelectedVehicle }) => {
+                const { vehicles, loading } = useVehicle();
 
-  if (loading) return  <div className="loading">
-      <Car className="car-icon" size={32} />
-      <p>Loading vehicles...</p>
-    </div>
+                   if (loading) return  <div className="loading">
+                 <Car className="car-icon" size={32} />
+                  <p>Loading vehicles...</p>
+             </div>
 
 
-  if (!vehicles.length) return <div className="no-vehicles">
-      <Car size={32} className="no-vehicles-icon" />
-      <p>No vehicles found!</p>
-    </div>
+                 if (!vehicles.length) return <div className="no-vehicles">
+                   <Car size={32} className="no-vehicles-icon" />
+               <p>No vehicles found!</p>
+                  </div>
 
   return (
     <div className="vehicle-table-container">

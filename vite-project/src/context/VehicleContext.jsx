@@ -2,47 +2,89 @@ import { createContext, useContext, useEffect, useState, useCallback, useMemo } 
 import { getVehicles, updateVehicle } from "../api/vehicleApi";
 
 const VehicleContext = createContext();
-
-export const VehicleProvider = ({ children }) => {
+        
+         export const VehicleProvider = ({ children }) => {
   const [vehicles, setVehicles] = useState([]);
-  const [loading, setLoading] = useState(true);
+         const [loading, setLoading] = useState(true);
 
-  const [statusFilter, setStatusFilter] = useState("all");
-  const [searchText, setSearchText] = useState("");
-  const [sortBy, setSortBy] = useState("");
-  const [page, setPage] = useState(1);
-  const limit = 10;
+         const [statusFilter, setStatusFilter] = useState("all");
+     const [searchText, setSearchText] = useState("");
+       const [sortBy, setSortBy] = useState("");
+        const [page, setPage] = useState(1);
+        const limit = 10;
 
-  const loadVehicles = useCallback(async () => {
-    setLoading(true);
-    const data = await getVehicles();
-    const arr = Object.entries(data || {}).map(([id, item]) => ({ id, ...item }));
-    setVehicles(arr);
-    setLoading(false);
-  }, []);
+//   const loadVehicles = useCallback(async () => {
+//     setLoading(true);
+//     const data = await getVehicles();
+//     // const arr = Object.entries(data || {}).map(([id, item]) => ({ id, ...item }));
+//     // setVehicles(arr);
+//     const arr = (data || []).map((item, index) => ({ ...item, _index: index }));
+// setVehicles(arr);
+
+//     console.log(arr)
+//     setLoading(false);
+//   }, []);
+
+const loadVehicles = useCallback(async () => {
+  setLoading(true);
+  const data = await getVehicles();
+
+  // convert object with numeric keys to array
+  const arr = data
+    ? Object.keys(data).map(key => ({ _index: key, ...data[key] }))
+    : [];
+
+  setVehicles(arr);
+  console.log(arr);
+  setLoading(false);
+}, []);
+
 
   useEffect(() => {
     loadVehicles();
   }, [loadVehicles]);
 
-  const editVehicle = useCallback(
-    async (id, payload) => {
-      setVehicles(prev => prev.map(v => (v.id === id ? { ...v, ...payload } : v)));
-      try {
-        await updateVehicle(id, payload);
-      } catch (err) {
-        console.error("Failed to update vehicle:", err);
-        await loadVehicles();
-      }
-    },
-    [loadVehicles]
-  );
+//   const editVehicle = useCallback(
+//     async (id, payload) => {
+//       setVehicles(prev => prev.map(v => (v.id === id ? { ...v, ...payload } : v)));
+//       try {
+//         await updateVehicle(id, payload);
+//       } catch (err) {
+//         console.error("Failed to update vehicle:", err);
+//         await loadVehicles();
+//       }
+//     },
+//     [loadVehicles]
+//   );
+const editVehicle = useCallback(
+  async (_index, payload) => {
+    
+        setVehicles(prev =>
+
+      prev.map(v => (v._index === _index ? { ...v, ...payload } : v))
+    );
+    try {
+      await updateVehicle(_index, payload); 
+    } catch (err) {
+
+      console.error("Failed to update vehicle:", err);
+      await loadVehicles();
+    }
+  },
+  [loadVehicles]
+);
+
 
   const processedVehicles = useMemo(() => {
+
     let temp = [...vehicles];
-    if (statusFilter !== "all") temp = temp.filter(v => v.status === statusFilter);
+
+     if (statusFilter !== "all") temp = temp.filter(v => v.status === statusFilter);
+
     if (searchText) temp = temp.filter(v => v.vehicleName.toLowerCase().includes(searchText.toLowerCase()));
-    if (sortBy === "vehicleName") temp.sort((a,b)=> a.vehicleName.localeCompare(b.vehicleName));
+
+          if (sortBy === "vehicleName") temp.sort((a,b)=> a.vehicleName.localeCompare(b.vehicleName));
+
     if (sortBy === "lastSeen") temp.sort((a,b)=> new Date(b.lastSeen)-new Date(a.lastSeen));
     return temp;
   }, [vehicles, statusFilter, searchText, sortBy]);
@@ -52,10 +94,10 @@ export const VehicleProvider = ({ children }) => {
     return processedVehicles.slice(start, start + limit);
   }, [processedVehicles, page, limit]);
 
-  return (
-    <VehicleContext.Provider value={{
-      vehicles: paginatedVehicles,
-      totalVehicles: processedVehicles.length,
+            return (
+                 <VehicleContext.Provider value={{
+                    vehicles: paginatedVehicles,
+                    totalVehicles: processedVehicles.length,
       loading,
       page,
       setPage,
@@ -68,7 +110,7 @@ export const VehicleProvider = ({ children }) => {
       setSortBy,
       editVehicle,
       loadVehicles
-    }}>
+                      }}>
       {children}
     </VehicleContext.Provider>
   );

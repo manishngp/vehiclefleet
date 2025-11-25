@@ -1,14 +1,20 @@
 import React from "react";
+
 import { useVehicle } from "../context/VehicleContext";
 
+
 const Pagination = () => {
-  const { page, setPage, totalVehicles, limit } = useVehicle();
+        const { page, setPage, totalVehicles, limit } = useVehicle();
   const totalPages = Math.ceil(totalVehicles / limit);
 
   return (
+
+
+
    <div className="pagination">
   <button 
-    onClick={() => setPage(p => Math.max(p-1, 1))} 
+         onClick={() => setPage(p => Math.max(p-1, 1))} 
+         
     disabled={page === 1}
     className="page-btn"
   >
