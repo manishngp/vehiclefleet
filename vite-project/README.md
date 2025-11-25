@@ -7,7 +7,7 @@
 
 A **modern, responsive web application** to manage and monitor a fleet of vehicles. Users can **search, filter, sort, edit, and track vehicles**, with real-time telemetry and activity logs.
 
-**Live Demo:** [🚀 View on Vercel](https://vehiclefleetwebapp.vercel.app/)
+**Live Demo:** [🚀 View on Vercel](https://webappvehiclefleet.vercel.app/)
 
 ---
 
