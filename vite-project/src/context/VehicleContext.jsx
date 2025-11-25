@@ -11,7 +11,7 @@ export const VehicleProvider = ({ children }) => {
   const [searchText, setSearchText] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [page, setPage] = useState(1);
-  const limit = 5;
+  const limit = 10;
 
   const loadVehicles = useCallback(async () => {
     setLoading(true);

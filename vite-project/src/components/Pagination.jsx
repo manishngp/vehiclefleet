@@ -6,11 +6,26 @@ const Pagination = () => {
   const totalPages = Math.ceil(totalVehicles / limit);
 
   return (
-    <div style={{ marginTop: "10px" }}>
-      <button onClick={() => setPage(p => Math.max(p-1, 1))} disabled={page === 1}>Prev</button>
-      <span style={{ margin: "0 10px" }}>Page {page} of {totalPages}</span>
-      <button onClick={() => setPage(p => Math.min(p+1, totalPages))} disabled={page === totalPages}>Next</button>
-    </div>
+   <div className="pagination">
+  <button 
+    onClick={() => setPage(p => Math.max(p-1, 1))} 
+    disabled={page === 1}
+    className="page-btn"
+  >
+    Prev
+  </button>
+
+  <span className="page-info">Page {page} of {totalPages}</span>
+
+  <button 
+    onClick={() => setPage(p => Math.min(p+1, totalPages))} 
+    disabled={page === totalPages}
+    className="page-btn"
+  >
+    Next
+  </button>
+</div>
+
   );
 };
 
